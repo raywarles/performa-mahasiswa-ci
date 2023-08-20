@@ -20,7 +20,7 @@ class Auth extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
-	public function index()
+	public function index2()
 	{
 		if ($this->ion_auth->logged_in()){
 			$user_id = $this->ion_auth->user()->row()->id; // Get User ID
@@ -48,6 +48,33 @@ class Auth extends CI_Controller
 		$this->load->view('_templates/auth/_header.php');
 		$this->load->view('auth/login', $this->data);
 		$this->load->view('_templates/auth/_footer.php');
+	}
+
+	public function index()
+	{
+		if ($this->ion_auth->logged_in()){
+			$user_id = $this->ion_auth->user()->row()->id; // Get User ID
+			$group = $this->ion_auth->get_users_groups($user_id)->row()->name; // Get user group
+			redirect('dashboard');
+		}
+		$this->data['identity'] = [
+			'name' => 'identity',
+			'id' => 'identity',
+			'type' => 'text',
+			'placeholder' => 'Email',
+			'autofocus'	=> 'autofocus',
+			'class' => 'form-control',
+			'autocomplete'=>'off'
+		];
+		$this->data['password'] = [
+			'name' => 'password',
+			'id' => 'password',
+			'type' => 'password',
+			'placeholder' => 'Password',
+			'class' => 'form-control',
+		];
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->load->view('auth/login2', $this->data);
 	}
 
 	public function cek_login()

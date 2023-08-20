@@ -81,6 +81,16 @@ class Master_model extends CI_Model
         return $this->datatables->generate();
     }
 
+    public function getDataKomponen($id)
+    {
+        $this->datatables->select('id_komponen, dosen_id, nama_matkul, komponen, persentase');
+        $this->datatables->from('m_komponen');
+        $this->datatables->join('matkul','m_komponen.matkul_id = matkul.id_matkul');
+        $this->datatables->where('dosen_id',$id);
+        $this->datatables->add_column('bulk_select', '<div class="text-center"><input type="checkbox" class="check" name="checked[]" value="$1"/></div>', 'id_komponen, dosen_id,nama_matkul,komponen,persentase');
+        return $this->datatables->generate();
+    }
+
     public function getJurusanById($id)
     {
         $this->db->where_in('id_jurusan', $id);

@@ -93,7 +93,7 @@
 				</ul>
 			</li>
 			<?php endif; ?>
-			<?php if( $this->ion_auth->is_admin() || $this->ion_auth->in_group('dosen') ) : ?>
+			<!-- <?php if( $this->ion_auth->is_admin() || $this->ion_auth->in_group('dosen') ) : ?>
 			<li class="<?=$page==='soal'?"active":""?>">
 				<a href="<?=base_url('soal')?>" rel="noopener noreferrer">
 					<i class="fa fa-file-text-o"></i> <span>Bank Soal</span>
@@ -106,22 +106,36 @@
 					<i class="fa fa-chrome"></i> <span>Ujian</span>
 				</a>
 			</li>
-			<?php endif; ?>
-			<?php if( $this->ion_auth->in_group('mahasiswa') ) : ?>
-			<li class="<?=$page==='ujian'?"active":""?>">
-				<a href="<?=base_url('ujian/list')?>" rel="noopener noreferrer">
-					<i class="fa fa-chrome"></i> <span>Ujian</span>
+			<?php endif; ?> -->
+			<?php if( $this->ion_auth->in_group('dosen') ) : ?>
+			<li class="<?=$page==='activity'?"active":""?>">
+				<a href="<?=base_url('activity/komponen')?>" rel="noopener noreferrer">
+					<i class="fa fa-puzzle-piece"></i> <span>Komponen Activity</span>
 				</a>
 			</li>
 			<?php endif; ?>
-			<?php if( !$this->ion_auth->in_group('mahasiswa') ) : ?>
+			<?php if( $this->ion_auth->in_group('dosen') ) : ?>
+			<li class="<?=$page==='activity'?"active":""?>">
+				<a href="<?=base_url('activity/master')?>" rel="noopener noreferrer">
+					<i class="fa fa-tasks"></i> <span>Activity</span>
+				</a>
+			</li>
+			<?php endif; ?>
+			<?php if( $this->ion_auth->in_group('mahasiswa') ) : ?>
+			<li class="<?=$page==='activity'?"active":""?>">
+				<a href="<?=base_url('activity/list')?>" rel="noopener noreferrer">
+					<i class="fa fa-chrome"></i> <span>Activity</span>
+				</a>
+			</li>
+			<?php endif; ?>
+			<!-- <?php if( !$this->ion_auth->in_group('mahasiswa') ) : ?>
 			<li class="header">REPORTS</li>
 			<li class="<?=$page==='hasilujian'?"active":""?>">
 				<a href="<?=base_url('hasilujian')?>" rel="noopener noreferrer">
 					<i class="fa fa-file"></i> <span>Hasil Ujian</span>
 				</a>
 			</li>
-			<?php endif; ?>
+			<?php endif; ?> -->
 			<?php if($this->ion_auth->is_admin()) : ?>
 			<li class="header">ADMINISTRATOR</li>
 			<li class="<?=$page==='users'?"active":""?>">
